@@ -1,12 +1,23 @@
 import { useParams } from "react-router-dom";
+import { Link } from "react-router-dom";
 
-const Offer = () => {
+const Offer = ({  }) => {
 
     const { offerId } = useParams();
 
     return (
         <div>
-            Offer Page
+            <header>
+                Offer Page
+            </header>
+        
+            <main>
+                <Link to = "/" >Go to home</Link>
+            </main>
+
+            <footer>
+
+            </footer>
         </div>
     );
 }
