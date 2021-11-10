@@ -1,1 +1,22 @@
 /* Other rules */
+
+* {
+    box-sizing: border-box !important;
+    font-family: 'Segoe UI' !important;
+}
+
+.main {
+    margin: auto;
+    max-width: 1268px;
+}
+
+.main-offers {
+    display: flex;
+    flex-flow: row wrap;
+}
+
+.main-offers-img {
+    width: 235px;
+    height: 428px;
+    object-fit: cover;
+}

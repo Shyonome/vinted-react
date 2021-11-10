@@ -6,6 +6,7 @@ import Home from "./components/Home";
 import Offer from "./components/Offer";
 
 import axios from "axios"
+import Loading from "./components/Loading";
 
 function App() {
 
@@ -26,6 +27,7 @@ function App() {
         };
         
         fetchData();
+
     }, [])
 
     return (
@@ -35,8 +37,9 @@ function App() {
           
           <Routes>
           
-            <Route path = "/" element = { <Home  /> } />
-            <Route path = "offer/:offerId" element = { <Offer  /> } />
+            { isLoading ? <> <Route path = "/loading" element = { <Loading/> } /> </> 
+            : <> <Route path = "/" element = { <Home data = {data} /> } />
+            <Route path = "offer/:offerId" element = { <Offer  /> } /> </> }
           
           </Routes>
         
