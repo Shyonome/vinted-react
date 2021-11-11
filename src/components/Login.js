@@ -4,31 +4,31 @@ import { useNavigate } from "react-router-dom";
 import Cookies from "js-cookie";
 import axios from "axios";
 
-const Signup = () => {
+const Login = () => {
   const [data, setData] = useState();
 
   const navigate = useNavigate();
 
-  const [username, setUsername] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
   const fetchData = async () => {
     try {
       const response = await axios.post(
-        "https://lereacteur-vinted-api.herokuapp.com/user/signup",
+        "https://lereacteur-vinted-api.herokuapp.com/user/login",
         {
           email: email,
-          username: username,
           password: password,
         }
       );
-      Cookies.set("UserPass", response.data.token, {
+      const my_cookie = Cookies.set("UserPass", response.data.token, {
         expires: 30,
       });
+      console.log(my_cookie);
       console.log(response.data);
       setData(response.data);
       navigate("/");
+      console.log("all good");
     } catch (error) {
       console.log(error.response);
     }
@@ -37,19 +37,11 @@ const Signup = () => {
   return (
     <div>
       <div>
-        Sign Up Page
+        Login
         <Link to="/">Go to home</Link>
       </div>
 
       <form>
-        <input
-          type="text"
-          placeholder="Name"
-          onChange={(event) => {
-            setUsername(event.target.value);
-          }}
-          value={username}
-        />
         <input
           type="email"
           placeholder="Email"
@@ -73,11 +65,12 @@ const Signup = () => {
             fetchData();
           }}
         >
-          S'inscrire
+          Se connecter
         </button>
+        <Link to="/signup">Pas encore de compte ? Inscrit toi !</Link>
       </form>
     </div>
   );
 };
 
-export default Signup;
+export default Login;

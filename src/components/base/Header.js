@@ -2,6 +2,8 @@ import { useNavigate, Link } from "react-router-dom";
 import Cookies from "js-cookie";
 
 const Header = () => {
+  const navigate = useNavigate();
+  const cookie = Cookies.get("UserPass");
   return (
     <header>
       <input type="search" />
@@ -10,7 +12,20 @@ const Header = () => {
         <button>s'inscrire</button>
       </Link>
 
-      <button>se connecter</button>
+      {!cookie ? (
+        <Link to="/login">
+          <button>se connecter</button>
+        </Link>
+      ) : (
+        <button
+          onClick={() => {
+            Cookies.remove("UserPass");
+            navigate("/");
+          }}
+        >
+          se déconnecter
+        </button>
+      )}
 
       <button>vends tes articles</button>
     </header>
