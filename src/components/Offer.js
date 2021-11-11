@@ -1,25 +1,54 @@
-import { useParams } from "react-router-dom";
-import { Link } from "react-router-dom";
+import { useState, useEffect } from "react";
+import { useParams, Link } from "react-router-dom";
+import axios from "axios";
+import Loading from "./Loading";
 
-const Offer = ({  }) => {
+const Offer = () => {
+  const { offerId } = useParams();
 
-    const { offerId } = useParams();
+  const [data, setData] = useState();
+  const [isLoading, setIsLoading] = useState(true);
 
-    return (
-        <div>
-            <header>
-                Offer Page
-            </header>
-        
-            <main>
-                <Link to = "/" >Go to home</Link>
-            </main>
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await axios.get(
+          `https://lereacteur-vinted-api.herokuapp.com/offer/${offerId}`
+        );
+        setData(response.data);
+        setIsLoading(false);
+      } catch (error) {
+        console.log(error.message);
+      }
+    };
 
-            <footer>
+    fetchData();
+  }, [offerId]);
 
-            </footer>
-        </div>
-    );
-}
+  return isLoading ? (
+    <Loading />
+  ) : (
+    <div>
+      <div>
+        Offer Page
+        <Link to="/">Go to home</Link>
+      </div>
+
+      <h3>{data.product_name}</h3>
+      <img src={data.product_image.secure_url} alt="" />
+      <ul>
+        {data.product_details.map((elem, index) => {
+          const keys = Object.keys(elem);
+          return (
+            <li key={index}>
+              <span>{keys[0]}: </span>
+              <span>{elem[keys[0]]}</span>
+            </li>
+          );
+        })}
+      </ul>
+    </div>
+  );
+};
 
 export default Offer;

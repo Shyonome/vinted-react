@@ -1,19 +1,20 @@
+import { useNavigate, Link } from "react-router-dom";
+import Cookies from "js-cookie";
+
 const Header = () => {
-    return (
-        <header>
+  return (
+    <header>
+      <input type="search" />
 
-            <img  />
+      <Link to="/signup">
+        <button>s'inscrire</button>
+      </Link>
 
-            <input type = "search" />
-            
-            <button>s'inscrire</button>
+      <button>se connecter</button>
 
-            <button>se connecter</button>
-
-            <button>vends tes articles</button>
-
-        </header>
-    );
-}
+      <button>vends tes articles</button>
+    </header>
+  );
+};
 
 export default Header;

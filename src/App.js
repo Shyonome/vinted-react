@@ -1,51 +1,25 @@
-import { useState, useEffect } from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 
 import "./App.css";
+import Header from "./components/base/Header";
 import Home from "./components/Home";
 import Offer from "./components/Offer";
-
-import axios from "axios"
-import Loading from "./components/Loading";
+import Signup from "./components/Signup";
 
 function App() {
+  return (
+    <div>
+      <Router>
+        <Header />
 
-    const [data, setData] = useState();
-    const [isLoading, setIsLoading] = useState(true);
-
-    useEffect(() => {
-        const fetchData = async () => {
-            try {
-              const response = await axios.get
-              ("https://lereacteur-vinted-api.herokuapp.com/offers");
-              console.log(response.data);
-              setData(response.data);
-              setIsLoading(false);
-            } catch (error) {
-              console.log(error.message);
-            }
-        };
-        
-        fetchData();
-
-    }, [])
-
-    return (
-      <div>
-        <Router>
-          
-          
-          <Routes>
-          
-            { isLoading ? <> <Route path = "/loading" element = { <Loading/> } /> </> 
-            : <> <Route path = "/" element = { <Home data = {data} /> } />
-            <Route path = "offer/:offerId" element = { <Offer  /> } /> </> }
-          
-          </Routes>
-        
-        </Router>
-      </div>
-    );
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/signup" element={<Signup />} />
+          <Route path="offer/:offerId" element={<Offer />} />
+        </Routes>
+      </Router>
+    </div>
+  );
 }
 
 export default App;
