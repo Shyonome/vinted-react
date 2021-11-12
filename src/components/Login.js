@@ -28,7 +28,6 @@ const Login = () => {
       console.log(response.data);
       setData(response.data);
       navigate("/");
-      console.log("all good");
     } catch (error) {
       console.log(error.response);
     }
