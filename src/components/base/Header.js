@@ -8,14 +8,16 @@ const Header = () => {
     <header>
       <input type="search" />
 
-      <Link to="/signup">
-        <button>s'inscrire</button>
-      </Link>
-
       {!cookie ? (
-        <Link to="/login">
-          <button>se connecter</button>
-        </Link>
+        <span>
+          <Link to="/signup">
+            <button>s'inscrire</button>
+          </Link>
+
+          <Link to="/login">
+            <button>se connecter</button>
+          </Link>
+        </span>
       ) : (
         <button
           onClick={() => {
