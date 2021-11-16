@@ -1,10 +1,15 @@
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import Cookies from "js-cookie";
 
 const Publish = () => {
+  const navigate = useNavigate();
+
   const [data, setData] = useState();
   const [file, setFile] = useState();
+  const [preview, setPreview] = useState();
+
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
   const [brand, setBrand] = useState("");
@@ -35,9 +40,13 @@ const Publish = () => {
         {
           headers: {
             authorization: `Bearer ${token}`,
+            "Content-Type": "multipart/form-data",
           },
         }
       );
+      if (response.data._id) {
+        navigate(`/offer/${response.data._id}`);
+      }
       console.log(response.data);
       setData(response.data);
     } catch (error) {
@@ -53,9 +62,14 @@ const Publish = () => {
 
       <form onSubmit={checkSubmit}>
         <input
-          onChange={(event) => setFile(event.target.files[0])}
           type="file"
+          onChange={(event) => {
+            setFile(event.target.files[0]);
+            setPreview(URL.createObjectURL(event.target.files[0]));
+          }}
         />
+
+        <img src={preview} alt="" />
 
         <div>
           <h4>Titre</h4>
