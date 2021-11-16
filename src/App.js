@@ -1,4 +1,6 @@
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import { Elements } from "@stripe/react-stripe-js";
+import { loadStripe } from "@stripe/stripe-js";
 
 import "./App.css";
 import Header from "./components/base/Header";
@@ -7,8 +9,12 @@ import Offer from "./components/Offer";
 import Signup from "./components/Signup";
 import Login from "./components/Login";
 import Publish from "./components/Publish";
+import Payment from "./components/Payment";
 
 function App() {
+  const stripePromise = loadStripe(
+    "pk_test_51JwPiDKaGpDif8jQi0A74iCi4Gty5afkOyydqMLfMAgwINHRR9ByiE45sYWyaWXZdbZVVqlWh9rBco4bqnN082Dc00OPUWm9Ze"
+  );
   return (
     <div>
       <Router>
@@ -20,6 +26,14 @@ function App() {
           <Route path="/login" element={<Login />} />
           <Route path="offer/:offerId" element={<Offer />} />
           <Route path="/publish" element={<Publish />} />
+          <Route
+            path="/payment"
+            element={
+              <Elements stripe={stripePromise}>
+                <Payment />
+              </Elements>
+            }
+          />
         </Routes>
       </Router>
     </div>

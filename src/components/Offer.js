@@ -2,12 +2,15 @@ import { useState, useEffect } from "react";
 import { useParams, Link } from "react-router-dom";
 import axios from "axios";
 import Loading from "./Loading";
+import Cookies from "js-cookie";
 
 const Offer = () => {
   const { offerId } = useParams();
 
   const [data, setData] = useState();
   const [isLoading, setIsLoading] = useState(true);
+
+  const token = Cookies.get("UserPass");
 
   useEffect(() => {
     const fetchData = async () => {
@@ -47,6 +50,15 @@ const Offer = () => {
           );
         })}
       </ul>
+      {token ? (
+        <Link to="/payment">
+          <button>Acheter</button>
+        </Link>
+      ) : (
+        <Link to="/login">
+          <button>Acheter</button>
+        </Link>
+      )}
     </div>
   );
 };
