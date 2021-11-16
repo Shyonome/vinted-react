@@ -6,6 +6,7 @@ import Home from "./components/Home";
 import Offer from "./components/Offer";
 import Signup from "./components/Signup";
 import Login from "./components/Login";
+import Publish from "./components/Publish";
 
 function App() {
   return (
@@ -18,6 +19,7 @@ function App() {
           <Route path="/signup" element={<Signup />} />
           <Route path="/login" element={<Login />} />
           <Route path="offer/:offerId" element={<Offer />} />
+          <Route path="/publish" element={<Publish />} />
         </Routes>
       </Router>
     </div>

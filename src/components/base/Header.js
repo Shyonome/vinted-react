@@ -79,19 +79,27 @@ const Header = () => {
           <Link to="/login">
             <button>se connecter</button>
           </Link>
+
+          <Link to="/login">
+            <button>vends tes articles</button>
+          </Link>
         </span>
       ) : (
-        <button
-          onClick={() => {
-            Cookies.remove("UserPass");
-            navigate("/");
-          }}
-        >
-          se déconnecter
-        </button>
-      )}
+        <span>
+          <button
+            onClick={() => {
+              Cookies.remove("UserPass");
+              navigate("/");
+            }}
+          >
+            se déconnecter
+          </button>
 
-      <button>vends tes articles</button>
+          <Link to="/publish">
+            <button>vends tes articles</button>
+          </Link>
+        </span>
+      )}
 
       <div>
         <span>Trié par: </span>
