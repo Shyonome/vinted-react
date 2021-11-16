@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { useParams, Link } from "react-router-dom";
+import { useParams, Link, useNavigate } from "react-router-dom";
 import axios from "axios";
 import Loading from "./Loading";
 import Cookies from "js-cookie";
@@ -11,6 +11,8 @@ const Offer = () => {
   const [isLoading, setIsLoading] = useState(true);
 
   const token = Cookies.get("UserPass");
+
+  const navigate = useNavigate();
 
   useEffect(() => {
     const fetchData = async () => {
@@ -51,9 +53,19 @@ const Offer = () => {
         })}
       </ul>
       {token ? (
-        <Link to="/payment">
-          <button>Acheter</button>
-        </Link>
+        <button
+          onClick={() => {
+            navigate("/payment", {
+              state: {
+                buyerId: token,
+                title: data.product_name,
+                amount: data.product_price,
+              },
+            });
+          }}
+        >
+          Acheter
+        </button>
       ) : (
         <Link to="/login">
           <button>Acheter</button>

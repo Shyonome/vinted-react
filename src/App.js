@@ -12,9 +12,7 @@ import Publish from "./components/Publish";
 import Payment from "./components/Payment";
 
 function App() {
-  const stripePromise = loadStripe(
-    "pk_test_51JwPiDKaGpDif8jQi0A74iCi4Gty5afkOyydqMLfMAgwINHRR9ByiE45sYWyaWXZdbZVVqlWh9rBco4bqnN082Dc00OPUWm9Ze"
-  );
+  const stripePromise = loadStripe("pk_test_5z9rSB8XwuAOihoBixCMfL6X");
   return (
     <div>
       <Router>
